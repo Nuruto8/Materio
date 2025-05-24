@@ -55,6 +55,8 @@ urlpatterns = [
     # Tables urls
     path("", include("apps.tables.urls")),
 
+    path("studentorg/", include("studentorg.urls")),
+
 
    
 ]
