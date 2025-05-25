@@ -1,0 +1,83 @@
+{% extends layout_path %}
+{% load static %}
+
+{% block title %}Dashboard - Students{% endblock title %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+  <h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">Dashboard /</span> Students
+  </h4>
+
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="card-title mb-0">List of Students</h5>
+        <small class="text-muted">Manage Students</small>
+      </div>
+      <a href="{% url 'student-add' %}" class="btn btn-success btn-sm">
+        <i class="bx bx-user-plus"></i> Add Student
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <form class="d-flex" method="get" action="">
+            <input
+              type="text"
+              name="search"
+              class="form-control"
+              placeholder="Search..."
+              value="{{ request.GET.search }}"
+            />
+            <button class="btn btn-outline-secondary ms-2" type="submit">
+              <i class="bx bx-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="table-responsive text-nowrap">
+        <table class="table table-hover table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>Student ID</th>
+              <th>Lastname</th>
+              <th>Firstname</th>
+              <th>Middlename</th>
+              <th>Program</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+            <tr>
+              <td>{{ object.student_id }}</td>
+              <td>{{ object.lastname }}</td>
+              <td>{{ object.firstname }}</td>
+              <td>{{ object.middlename }}</td>
+              <td>{{ object.program }}</td>
+              <td>
+                <a href="{% url 'student-edit' object.id %}" class="btn btn-sm btn-primary me-1">
+                  <i class="bx bx-edit"></i> Edit
+                </a>
+                <a href="{% url 'student-delete' object.id %}" class="btn btn-sm btn-danger">
+                  <i class="bx bx-trash"></i> Delete
+                </a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="6" class="text-center text-muted">
+                <strong>No Records Found</strong>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     "apps.forms",
     "apps.form_layouts",
     "apps.tables",
-    "studentorg",
+    "apps.student",
 ]
 
 MIDDLEWARE = [
